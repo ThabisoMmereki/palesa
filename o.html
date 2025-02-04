@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            margin-top: 100px;
+            position: relative;
+        }
+        h1 {
+            color: #ff2e63;
+            font-size: 40px;
+        }
+        #valentineImage {
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            font-size: 22px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        #yesButton {
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            color: white;
+        }
+        #yesButton:hover {
+            transform: scale(1.1);
+            background: linear-gradient(to right, #ff1e56, #b91372);
+        }
+        #noButton {
+            position: absolute;
+            background: linear-gradient(to right, #8e2de2, #4a00e0);
+            color: white;
+        }
+        #noButton:hover {
+            transform: scale(1.1);
+            background: linear-gradient(to right, #6a00f4, #3700ff);
+        }
+        @keyframes float-hearts {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            color: #ff477e;
+            font-size: 30px;
+            animation: float-hearts 5s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you be my valentine?</h1>
+        <img id="valentineImage" src="ad.jpg" alt="Valentine's Day Image">
+        <br><br>
+        <button id="yesButton" class="button">Yes</button>
+        <button id="noButton" class="button">No</button>
+    </div>
+    <script>
+        document.getElementById("yesButton").addEventListener("click", function() {
+            alert("I love you! See you soon <3");
+        });
+        
+        var noButton = document.getElementById("noButton");
+        var yesButton = document.getElementById("yesButton");
+        var valentineImage = document.getElementById("valentineImage");
+
+        var noTexts = ["Are you sure?", "Please give me a chance pookie", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry"];
+        var imageSources = ["https://pbs.twimg.com/media/Fyk7XMnaEAI3PsB.jpg", "https://media.tenor.com/BP70qe8X0J8AAAAe/crycat-crying-cat.png", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9e71v7IfFLLS_1CfY2it3an-6XH1uROjTfU5c88AwRL8aRkqAYDmoFrm9gpbUqwNameo&usqp=CAU", "https://i.pinimg.com/736x/cb/d8/3b/cbd83b534a315e809a9da2b8cd3ac3bf.jpg"];
+
+        noButton.addEventListener("mouseover", function() {
+            var randomIndex = Math.floor(Math.random() * noTexts.length);
+            noButton.innerText = noTexts[randomIndex];
+            
+            var randomX = Math.floor(Math.random() * (window.innerWidth - 150));
+            var randomY = Math.floor(Math.random() * (window.innerHeight - 100));
+            noButton.style.left = randomX + "px";
+            noButton.style.top = randomY + "px";
+
+            var randomImageIndex = Math.floor(Math.random() * imageSources.length);
+            valentineImage.src = imageSources[randomImageIndex];
+        });
+
+        function createHeart() {
+            var heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = "100vh";
+            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
